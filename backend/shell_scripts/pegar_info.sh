@@ -4,6 +4,7 @@
 #roda top aqui
 #pega pid
 #enquanto tiver rodando, enquanto nao apertar ctrl+c:wq
+#top -b -n 1
 
 while true
 do

@@ -1,0 +1,1 @@
+lscpu | grep 'Architecture\|Model name\|CPU MHz' | awk -F ':' {'gsub(/  /, ); print '} -> get the cpu name, MHZ and Architeture

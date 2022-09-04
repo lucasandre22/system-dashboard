@@ -1,0 +1,10 @@
+frontend request -> backend -> shell script -> file
+file -> shell script? -> backend -> frontend
+
+next steps:
+top command parser
+log4j into the application
+
+hours log:
+3h
+3h 04/09/2022

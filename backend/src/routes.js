@@ -1,5 +1,6 @@
 const express = require('express');
 const CpuController = require('./controllers/CpuController');
+const TopController = require('./controllers/TopController');
 
 const routes = express.Router();
 
@@ -15,5 +16,6 @@ routes.put('/users/:id', (req, res) => {
 
 //routes.post('/users', SessionController.store);
 routes.get('/cpu', CpuController.index);
+routes.get('/get_top_info', TopController.index);
 
 module.exports = routes;

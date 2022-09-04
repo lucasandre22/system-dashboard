@@ -1,0 +1,8 @@
+{
+    "server": {
+      "host": "localhost",
+      "port": 777
+    },
+    "script_output_dir": "./tmp_files/",
+    "script_dir": "./shell_scripts/"
+}
