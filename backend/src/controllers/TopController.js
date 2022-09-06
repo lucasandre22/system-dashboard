@@ -30,7 +30,7 @@ module.exports = {
         const outputFilePath = script_output_dir + "top.tmp";
         const toExec = 'sh ' + scriptPath;
         //wait for exec command to execute, problems regarding timing founded
-        //await execCommand(toExec);
+        await execCommand(toExec);
         const file = await parseTopCommandOutput(outputFilePath);
         const content = await buildFileAsJson(file);
         return res.json(content);
