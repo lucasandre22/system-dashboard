@@ -4,5 +4,6 @@
       "port": 7777
     },
     "script_output_dir": "./tmp_files/",
-    "script_dir": "./shell_scripts/"
+    "script_dir": "./shell_scripts/",
+    "run_interval": "0.5"
 }
