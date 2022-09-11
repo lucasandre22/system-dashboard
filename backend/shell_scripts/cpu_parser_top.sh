@@ -10,7 +10,6 @@ top_processes_headers=(Pid User Pr Ni Virt Res Shr S Cpu Mem Time Command)
 #top_processes_headers=(Pid User  .... valueN)
 
 #make this commands quiet
-echo $first_line
 output+='time\n'
 output+=$(echo $first_line | awk {'print $3'})
 output+='\nup\n'

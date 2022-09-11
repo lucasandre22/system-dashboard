@@ -17,5 +17,6 @@ routes.put('/users/:id', (req, res) => {
 //routes.post('/users', SessionController.store);
 routes.get('/cpu', CpuController.index);
 routes.get('/get_top_info', TopController.index);
+routes.post('/get_top_info', TopController.index);
 
 module.exports = routes;
