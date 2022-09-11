@@ -2,5 +2,9 @@
 ### Project for College
 ### Backend made by me
 
-### Frontend:
-### [Material Dashboard 2](http://demos.creative-tim.com/material-dashboard/pages/dashboard.html?ref=readme-md2) 
+# How to run it?
+It uses tipboard as frontend.
+pip install tipboard
+tipboard create_project my_test_dashboard
+export PATH=$PATH:/home/user/.local/bin
+tipboard runserver

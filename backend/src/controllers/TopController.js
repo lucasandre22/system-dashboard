@@ -5,22 +5,21 @@ const buildFileAsJson = require('../fileUtils');
 const { execCommand } = require('../utils');
 
 
-async function parseTopCommandOutput(outputFilePath) {
+async function parseTopCommandOutput() {
     //get the file from the execCommand output
-    const outputFile = script_output_dir + "top_parsed.tmp";
     const scriptParser = script_dir + "cpu_parser_top.sh";
     await execCommand(scriptParser);
-    return outputFile;
 }
 
 module.exports = {
     async index(req, res) {
         const scriptPath = script_dir + "get_top_info.sh";
-        const outputFilePath = script_output_dir + "top.tmp";
         const getTopInfo = 'sh ' + scriptPath;
         await execCommand(getTopInfo);
-        const file = await parseTopCommandOutput(outputFilePath);
-        const content = await buildFileAsJson(file);
+        await parseTopCommandOutput();
+        //I can execute only this script as command once and get the same result
+        //await execCommand('sh ' + script_dir + "test_script.sh");
+        const content = await buildFileAsJson(script_output_dir + "top_parsed.tmp");
         return res.json(content);
     }
 };

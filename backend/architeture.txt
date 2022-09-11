@@ -8,3 +8,13 @@ log4j into the application
 hours log:
 3h
 3h 04/09/2022
+
+[
+    "time": "13:03:20",
+    "pids": {
+        "1023": {
+            "USER": "Almeida"
+        }
+    }
+
+]
