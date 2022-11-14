@@ -3,7 +3,11 @@ const exec = util.promisify(require('child_process').exec);
 
 module.exports = {
     async execCommand(command) {
-        const { stdout, stderr } = await exec(command);
-        return stdout;
+        try {
+            const { stdout, stderr } = await exec(command);
+            return stdout;
+        } catch(err) {
+            return err.stderr;
+        }
     }
 };

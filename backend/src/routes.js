@@ -23,6 +23,7 @@ routes.get('/cpu_usage', CpuController.usage);
 routes.get('/driver', DriverController.info);
 routes.get('/get_top_info', TopController.index);
 routes.post('/get_top_info', TopController.index);
-routes.post('/pid_info', PidController.index);
+routes.post('/pid', PidController.index);
+routes.post('/pid_info', PidController.info);
 
 module.exports = routes;

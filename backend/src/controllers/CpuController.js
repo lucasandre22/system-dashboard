@@ -45,8 +45,7 @@ module.exports = {
         const { usage } = req.query;
         console.log('lala')
         //run bash command to get usage percentage
-        
-    
+
     },
     async info(req, res) {
         let cpuInfo = await execAndParseLsCpu();
