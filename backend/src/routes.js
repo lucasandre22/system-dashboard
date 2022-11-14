@@ -2,6 +2,7 @@ const express = require('express');
 const CpuController = require('./controllers/CpuController');
 const TopController = require('./controllers/TopController');
 const PidController = require('./controllers/PidController');
+const DriverController = require('./controllers/DriverController');
 
 const routes = express.Router();
 
@@ -15,8 +16,11 @@ routes.put('/users/:id', (req, res) => {
     return res.json({ message: req.params.id });
 })
 
-//routes.post('/users', SessionController.store);
-routes.get('/cpu', CpuController.index);
+
+routes.get('/cpu', CpuController.info);
+routes.get('/cpu_usage', CpuController.usage);
+
+routes.get('/driver', DriverController.info);
 routes.get('/get_top_info', TopController.index);
 routes.post('/get_top_info', TopController.index);
 routes.post('/pid_info', PidController.index);
