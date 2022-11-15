@@ -19,6 +19,7 @@ async function splitStatOutput(pid) {
 module.exports = {
     /*
     * https://man7.org/linux/man-pages/man5/proc.5.html
+    * When a pid comes in request body, return /proc/<pid> directory informations about the pid.
     */
     async index(req, res) {
         const getCommandLine = "cat /proc/" + req.body.pid + "/cmdline";
@@ -31,8 +32,7 @@ module.exports = {
         return res.json(statObject);
     },
     /*
-    *
-    * return all pids and their execFilename
+    * return all running processes pids and their execFilename
     */
     async info(req, res) {
         let output = await execCommand("find /proc -maxdepth 1 -mindepth 1 -type d -printf '\%f\n' | egrep -i '[\\0-9]' | while read -r pid ; do echo \"$pid $(cat /proc/\$pid/comm)\"; done");

@@ -3,6 +3,9 @@ const CpuController = require('./controllers/CpuController');
 const TopController = require('./controllers/TopController');
 const PidController = require('./controllers/PidController');
 const DriverController = require('./controllers/DriverController');
+const MemoryController = require('./controllers/MemoryController');
+const NetController = require('./controllers/NetController');
+const OsController = require('./controllers/OsController');
 
 const routes = express.Router();
 
@@ -21,6 +24,13 @@ routes.get('/cpu', CpuController.info);
 routes.get('/cpu_usage', CpuController.usage);
 
 routes.get('/driver', DriverController.info);
+
+routes.get('/ram', MemoryController.info);
+
+routes.get('/net', NetController.info);
+
+routes.get('/os', OsController.info);
+
 routes.get('/get_top_info', TopController.index);
 routes.post('/get_top_info', TopController.index);
 routes.post('/pid', PidController.index);
