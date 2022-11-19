@@ -36,7 +36,7 @@ module.exports = {
 
     },
     async info(req, res) {
-        let cpuInfo = await execAndParseLsCpu();
+        const cpuInfo = await execAndParseLsCpu();
         return res.json(cpuInfo);
     }
 };

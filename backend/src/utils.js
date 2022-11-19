@@ -5,6 +5,8 @@ module.exports = {
     async execCommand(command) {
         try {
             const { stdout, stderr } = await exec(command);
+            if(stderr)
+                return stderr;
             return stdout;
         } catch(err) {
             return err.stderr;

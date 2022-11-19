@@ -1,8 +1,6 @@
 var osu = require('node-os-utils')
 var netstat = osu.netstat
 
-
-
 module.exports = {
     async index(req, res) {
 
