@@ -6,7 +6,6 @@ var cpu = osu.cpu
 async function execAndParseLsCpu(data) {
     let output = await execCommand('lscpu');
     let dataMap = await splitTextBy(':', output);
-    console.log(dataMap)
     return {
         'model': dataMap.get('Model name'),
         'mhz': dataMap.get('CPU max MHz'),
@@ -31,9 +30,11 @@ module.exports = {
     },
     async usage(req, res) {
         const { usage } = req.query;
-        console.log('lala')
-        //run bash command to get usage percentage
-
+        await cpu.usage()
+        .then(cpuPercentage => {
+            console.log(cpuPercentage)
+            return res.json({ cpuPercentage });
+        })
     },
     async info(req, res) {
         const cpuInfo = await execAndParseLsCpu();
