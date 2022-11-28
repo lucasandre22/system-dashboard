@@ -57,11 +57,27 @@
           </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link text-white " href="../pages/tables.html">
+              <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="material-icons opacity-10">table_view</i>
+              </div>
+              <span class="nav-link-text ms-1">Processes</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white " href="../pages/tables.html">
+              <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="material-icons opacity-10">table_view</i>
+              </div>
+              <span class="nav-link-text ms-1">Memory status</span>
+            </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link text-white " href="../pages/tables.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
-            <span class="nav-link-text ms-1">Hd status</span>
+            <span class="nav-link-text ms-1">Driver status</span>
           </a>
         </li>
         <li class="nav-item">
@@ -69,7 +85,7 @@
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">receipt_long</i>
             </div>
-            <span class="nav-link-text ms-1">Running processes</span>
+            <span class="nav-link-text ms-1">CPU Status</span>
           </a>
         </li>
         <li class="nav-item">
@@ -139,7 +155,7 @@
           </div>
           <ul class="navbar-nav  justify-content-end">
             <li class="nav-item d-flex align-items-center">
-              <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href="">Update</a>
+              <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" onclick="dashboardPageLoad()">Update informations</a>
             </li>
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
@@ -183,14 +199,20 @@
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+
+        
           <div class="card">
             <div class="card-header p-3 pt-2">
               <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
                 <i class="material-icons opacity-10">weekend</i>
               </div>
               <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Processor</p>
-                <h6 class="mb-0" id="processor-name"></h6>
+                <p class="text-sm mb-1 text-capitalize">Processor</p>
+                <p class="text-sm mb-0 text-capitalize text-end" id="processor-name">...</p>
+                <p class="text-sm mb-0 text-capitalize" id="processor-mhz"></p>
+                <p class="text-sm mb-0 text-capitalize" id="processor-cache">cache</p>
+                <p class="text-sm mb-0 text-capitalize" id="processor-cores"></p>
+                <p class="text-sm mb-0 text-capitalize" id="processor-architeture"></p>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -198,6 +220,8 @@
               <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than last week</p>
             </div>
           </div>
+
+
         </div>
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
           <div class="card">
@@ -206,8 +230,8 @@
                 <i class="material-icons opacity-10">person</i>
               </div>
               <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">Today's Users</p>
-                <h4 class="mb-0">2,300</h4>
+                <p class="text-sm mb-1 text-capitalize">RAM Memory</p>
+                <p class="text-sm mb-0 text-capitalize" id="ram-total"></p>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -223,8 +247,10 @@
                 <i class="material-icons opacity-10">person</i>
               </div>
               <div class="text-end pt-1">
-                <p class="text-sm mb-0 text-capitalize">New Clients</p>
-                <h4 class="mb-0">3,462</h4>
+                <p class="text-sm mb-1 text-capitalize">Driver</p>
+                <p class="text-sm mb-0 text-capitalize" id="driver-total"></p>
+                <p class="text-sm mb-0 text-capitalize" id="driver-free"></p>
+                <p class="text-sm mb-0 text-capitalize" id="driver-used"></p>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -255,19 +281,25 @@
         <div class="col-lg-4 col-md-6 mt-4 mb-4">
           <div class="card z-index-2 ">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-              <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                <div class="chart">
-                  <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
-                </div>
-              </div>
             </div>
             <div class="card-body">
-              <h6 class="mb-0 ">Website Views</h6>
-              <p class="text-sm ">Last Campaign Performance</p>
+              <h6 class="mb-0 mt-2">Operational system info</h6>
+              <p class="text-sm ">Information about the specs</p>
+              <p id="os-type" class="mb-0 text-sm">OS: </p>
+              <p id="os-distro" class="mb-0 text-sm">Distribution: </p>
+              <p id="os-hostname" class="mb-0 text-sm">Device's name: </p>
+              <p id="os-ip" class="mb-0 text-sm">Ip: </p>
+
+              <hr class="dark horizontal">
+              <h6 class="mb-0 ">Kernel</h6>
+              <p id="os-kernel" class="mb-0 text-sm"> </p>
+              <p id="os-vendor" class="mb-0 text-sm"> </p>
+              <p id="hardware-model" class="mb-0 text-sm"> </p>
+              <p id="hardware-chassis" class="mb-0 text-sm"> </p>
               <hr class="dark horizontal">
               <div class="d-flex ">
                 <i class="material-icons text-sm my-auto me-1">schedule</i>
-                <p class="mb-0 text-sm"> campaign sent 2 days ago </p>
+                <p class="mb-0 text-sm"> Updated ... </p>
               </div>
             </div>
           </div>
@@ -282,7 +314,7 @@
               </div>
             </div>
             <div class="card-body">
-              <h6 class="mb-0 "> Daily Sales </h6>
+              <h6 class="mb-0 "> CPU consumption </h6>
               <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase in today sales. </p>
               <hr class="dark horizontal">
               <div class="d-flex ">
@@ -302,7 +334,7 @@
               </div>
             </div>
             <div class="card-body">
-              <h6 class="mb-0 ">Completed Tasks</h6>
+              <h6 class="mb-0 "> Memory consumption </h6>
               <p class="text-sm ">Last Campaign Performance</p>
               <hr class="dark horizontal">
               <div class="d-flex ">
@@ -736,12 +768,14 @@
       </div>
     </div>
   </div>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <!--   Core JS Files   -->
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/chartjs.min.js"></script>
+  <script src="../utils.js"></script>
   <script src="../dashboardFiller.js"></script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
