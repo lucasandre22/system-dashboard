@@ -21,9 +21,60 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <style>
-    .table td, .table tr {
-        text-align: center;
-    } 
+        body {
+            background: #000;
+            color: #0F0;
+            font-family: monospace;
+            height: 100vh;
+            box-sizing: border-box;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            word-break: break-all;
+            margin: 0;
+            padding: 16px;
+        }
+
+        #input {
+            display: inline;
+            outline: none;
+            visibility: visible;
+        }
+
+        /*
+        If you press the Insert key, the vertical line caret will automatically
+        be replaced by a one-character selection.
+        */
+        #input::selection {
+            color: #000;
+            background: #0F0;
+        }
+
+        #input:empty::before {
+            
+        }
+
+        @keyframes blink {
+        to {
+            visibility: hidden;
+        }
+        }
+
+        #input:focus + #caret {
+        animation: blink 1s steps(5, start) infinite;
+        }
+
+        #input.noCaret + #caret {
+        visibility: hidden;
+        }
+
+        #caret {
+        border: 0;
+        padding: 0;
+        outline: none;
+        background-color: #0F0;
+        display: inline-block;
+        font-family: monospace;
+        }
   </style>
   <title>
     Material Dashboard 2 by Creative Tim
@@ -104,30 +155,6 @@
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/profile.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">person</i>
-            </div>
-            <span class="nav-link-text ms-1">Profile</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/sign-in.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">login</i>
-            </div>
-            <span class="nav-link-text ms-1">Sign In</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/sign-up.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">assignment</i>
-            </div>
-            <span class="nav-link-text ms-1">Sign Up</span>
-          </a>
-        </li>
       </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
@@ -153,9 +180,6 @@
             </div>
           </div>
           <ul class="navbar-nav  justify-content-end">
-            <li class="nav-item d-flex align-items-center">
-                <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" onclick="onLoad()">Update informations</a>
-            </li>
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                 <div class="sidenav-toggler-inner">
@@ -181,66 +205,20 @@
           <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">Processes table</h6>
+                <h6 class="text-white ps-3">Machine's console (only commands to get infomation)</h6>
               </div>
             </div>
-
             <div class="card-body px-0 pb-2">
-              <div class="table-responsive p-0 table-sm">
-                <table class="table align-items-center mb-0 table-striped table-hover">
-                  <thead>
-                    <tr>
-                      <th class="text-uppercase text-secondary text-xs font-weight-bolder">Pid</th>
-                      <th class="text-uppercase text-secondary text-xs font-weight-bolder">Process</th>
-                      <th class="text-uppercase text-secondary text-xs font-weight-bolder">User</th>
-                      <th class="text-uppercase text-secondary text-xs font-weight-bolder">Time running</th>
-                      <th class="text-uppercase text-secondary text-xs font-weight-bolder">CPU</th>
-                      <th class="text-uppercase text-secondary text-xs font-weight-bolder">Memory</th>
-                      <th class="text-uppercase text-secondary text-xs font-weight-bolder">#</th>
-                      <th class="text-uppercase text-secondary text-xs font-weight-bolder">#</th>
-                      <!--<th class="text-secondary opacity-7"></th>  action -->
-                    </tr>
-                  </thead>
-                  <tbody id="processes-table">
-                  </tbody>
-                </table>
-
-              </div>
+                <div class="bg-gradient-dark shadow-success border-radius-lg py-3 pe-1">
+                    <div id="history"></div>
+                        >
+                <div id="input" contenteditable="true"></div><button id="caret" for="input">&nbsp;</button>
+                </div>
             </div>
           </div>
         </div>
       </div>
       <footer class="footer py-4  ">
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-              <div class="copyright text-center text-sm text-muted text-lg-start">
-                © <script>
-                  document.write(new Date().getFullYear())
-                </script>,
-                made with <i class="fa fa-heart"></i> by
-                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                for a better web.
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
       </footer>
     </div>
   </main>
@@ -318,88 +296,13 @@
       </div>
     </div>
   </div>
-  <!-- TEMPLATES -->
-  <button id="button-trash-template" type="button" class="btn btn-primary">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-    </svg>
-  </button>
-  <button id="button-template" type="button" class="btn btn-info"></button>
-  <!--<a id="button-template" class="btn btn-secondary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" style="visibility:hidden"></a>-->
-  <table id="table-template" class="table align-items-center mb-0 table-striped table-hover collapse accordian-body">
-    <thead>
-      <tr>
-        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Exec filename</th>
-        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">State</th>
-        <th class="text-uppercase text-secondary text-xxs font-weight-bolder ps-2">Parent pid</th>
-        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Priority</th>
-        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Nice</th>
-        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Threads</th>
-        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Subprocesses</th>
-      </tr>
-    </thead>
-        <tbody>
-            <tr id="tr-template" class="collapse">
-                <td id="0-td-">
-                    <p class="table-header text-uppercase text-secondary text-xs font-weight-bolder ps-2">Command line</p>
-                    <p class="collapse"></p>
-                    <button class="btn btn-success" onclick="copyCmdLine(this.parentNode)">Copy</button>
-                </td>
-                <td id="1-td-">
-                    <p class="table-header text-uppercase text-secondary text-xs font-weight-bolder ps-2">Exec filename</p>
-                    <p></p>
-                </td>
-                <td id="2-td-">
-                    <p class="table-header text-uppercase text-secondary text-xs font-weight-bolder ps-2">Nice</p>
-                    <p></p>
-                </td>
-                <td id="3-td-">
-                    <p class="table-header text-uppercase text-secondary text-xs font-weight-bolder ps-2">State</p>
-                    <p></p>
-                </td>
-                <td id="4-td-">
-                    <p class="table-header text-uppercase text-secondary text-xs font-weight-bolder ps-2">Parent pid</p>
-                    <p></p>
-                </td>
-                <td id="5-td-">
-                    <p class="table-header text-uppercase text-secondary text-xs font-weight-bolder ps-2">Priority</p>
-                    <p></p>
-                </td>
-                <td id="6-td-">
-                    <p class="table-header text-uppercase text-secondary text-xs font-weight-bolder ps-2">Threads</p>
-                    <p></p>
-                </td>
-                <td id="7-td-">
-                    <p class="table-header text-uppercase text-secondary text-xs font-weight-bolder ps-2">Subprocesses pids</p>
-                    <p class="col-2"></p>
-                </td>
-              </tr>
-        <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
-            <td>abc</td>
-            <td>abc</td>
-            <td>abc</td>
-            <td>abc</td>
-            <td>abc</td>
-            <td>abc</td>
-            <td>abc</td>
-        </tr>
-        </tbody>
-  </table>
-  
-  
-  
-  
-  
-  
-  
   <!--   Core JS Files   -->
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script src="../utils.js"></script>
-  <script src="../processesFiller.js"></script>
+  <script src="../console.js"></script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
