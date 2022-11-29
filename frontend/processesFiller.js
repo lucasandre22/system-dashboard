@@ -83,8 +83,9 @@ function createTableLine(pid, pidObject) {
     let button = document.getElementById("button-trash-template").cloneNode(true);
     button.id = "button-" + pid;
     button.onclick = function() {
-        alert('Are you sure that you want to kill process ' + pid + "?");
-        removePid(pid);
+        if(confirm('Are you sure that you want to kill process ' + pid + "?")) {
+            removePid(pid);
+        }
     };
     tableCell.appendChild(button)
     tableLine.appendChild(tableCell);

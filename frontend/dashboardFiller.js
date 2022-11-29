@@ -1,176 +1,86 @@
 google.charts.load('current', {
-    'packages':['corechart','table','bar']
+    'packages':['gauge']
 });
 
+//google.setOnLoadCallback(drawChart);
 
+google.charts.setOnLoadCallback(drawCpuChart);
+google.charts.setOnLoadCallback(drawRamChart);
 
-/*var ctx2 = document.getElementById("chart-line").getContext("2d");
+function drawCpuChart() {
+    drawCpuChart(0);
+}
 
-new Chart(ctx2, {
-    type: "line",
-    data: {
-    labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [{
-        label: "Mobile apps",
-        tension: 0,
-        borderWidth: 0,
-        pointRadius: 5,
-        pointBackgroundColor: "rgba(255, 255, 255, .8)",
-        pointBorderColor: "transparent",
-        borderColor: "rgba(255, 255, 255, .8)",
-        borderColor: "rgba(255, 255, 255, .8)",
-        borderWidth: 4,
-        backgroundColor: "transparent",
-        fill: true,
-        data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
-        maxBarThickness: 6
+function drawRamChart() {
+    drawCpuChart(0);
+}
 
-    }],
-    },
-    options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-        legend: {
-        display: false,
-        }
-    },
-    interaction: {
-        intersect: false,
-        mode: 'index',
-    },
-    scales: {
-        y: {
-        grid: {
-            drawBorder: false,
-            display: true,
-            drawOnChartArea: true,
-            drawTicks: false,
-            borderDash: [5, 5],
-            color: 'rgba(255, 255, 255, .2)'
-        },
-        ticks: {
-            display: true,
-            color: '#f8f9fa',
-            padding: 10,
-            font: {
-            size: 14,
-            weight: 300,
-            family: "Roboto",
-            style: 'normal',
-            lineHeight: 2
-            },
-        }
-        },
-        x: {
-        grid: {
-            drawBorder: false,
-            display: false,
-            drawOnChartArea: false,
-            drawTicks: false,
-            borderDash: [5, 5]
-        },
-        ticks: {
-            display: true,
-            color: '#f8f9fa',
-            padding: 10,
-            font: {
-            size: 14,
-            weight: 300,
-            family: "Roboto",
-            style: 'normal',
-            lineHeight: 2
-            },
-        }
-        },
-    },
-    },
-});*/
+function drawCpuChart(value) {
+    var data = google.visualization.arrayToDataTable([
+        ['Label', 'Value'],
+        ['CPU (%)', value]
+    ]);
+    var options = {
+        width: 500,
+        height: 700,
+        greenFrom: 0,
+        animation: { duration: 1000, easing: 'inAndOut' },
+        greenTo: 80,
+        redFrom: 90,
+        redTo: 100,
+        yellowFrom: 75,
+        yellowTo: 90,
+        minorTicks: 5
+    };
+    var chart = new google.visualization.Gauge(document.getElementById('chart-gauge-cpu'));
+    chart.draw(data, options);
+    /*setTimeout(function() {
+        console.log("lala");
+        doRequest('cpu_usage', function (jsonObject) {
+            var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['CPU (%)', jsonObject.cpuPercentage],
+            ]);
+            chart.draw(data, options);
+        });
+        
+    }, 1000);*/
+}
 
-var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
+function drawRamChart(value) {
+    var data = google.visualization.arrayToDataTable([
+        ['Label', 'Value'],
+        ['RAM (%)', value]
+    ]);
+    var options = {
+        width: 500,
+        height: 600,
+        greenFrom: 0,
+        greenTo: 80,
+        redFrom: 90,
+        redTo: 100,
+        yellowFrom: 75,
+        yellowTo: 90,
+        minorTicks: 5
+    };
+    var chart = new google.visualization.Gauge(document.getElementById('chart-gauge-ram'));
+    chart.draw(data, options);
+}
 
-new Chart(ctx3, {
-    type: "line",
-    data: {
-    labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [{
-        label: "Mobile apps",
-        tension: 0,
-        borderWidth: 0,
-        pointRadius: 5,
-        pointBackgroundColor: "rgba(255, 255, 255, .8)",
-        pointBorderColor: "transparent",
-        borderColor: "rgba(255, 255, 255, .8)",
-        borderWidth: 4,
-        backgroundColor: "transparent",
-        fill: true,
-        data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-        maxBarThickness: 6
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-    }],
-    },
-    options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-        legend: {
-        display: false,
-        }
-    },
-    interaction: {
-        intersect: false,
-        mode: 'index',
-    },
-    scales: {
-        y: {
-        grid: {
-            drawBorder: false,
-            display: true,
-            drawOnChartArea: true,
-            drawTicks: false,
-            borderDash: [5, 5],
-            color: 'rgba(255, 255, 255, .2)'
-        },
-        ticks: {
-            display: true,
-            padding: 10,
-            color: '#f8f9fa',
-            font: {
-            size: 14,
-            weight: 300,
-            family: "Roboto",
-            style: 'normal',
-            lineHeight: 2
-            },
-        }
-        },
-        x: {
-        grid: {
-            drawBorder: false,
-            display: false,
-            drawOnChartArea: false,
-            drawTicks: false,
-            borderDash: [5, 5]
-        },
-        ticks: {
-            display: true,
-            color: '#f8f9fa',
-            padding: 10,
-            font: {
-            size: 14,
-            weight: 300,
-            family: "Roboto",
-            style: 'normal',
-            lineHeight: 2
-            },
-        }
-        },
-    },
-    },
-});
-
-function buildUrl(requestType) {
-    return 'http://192.168.5.106:7777/' + requestType;
+async function chartsUpdater() {
+    while(true) {
+        await sleep(500);
+        doRequest('cpu_usage', function (jsonObject) {
+            drawCpuChart(jsonObject.cpuPercentage);
+        });
+        doRequest('ram', function (jsonObject) {
+            drawRamChart(jsonObject.usedMemPercentage);
+        });
+    }
 }
 
 async function doRequest(requestType, onLoad) {
@@ -302,68 +212,13 @@ function resetLastUpdatedTime() {
 
 }
 
-function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-        ['Label', 'Value'],
-        ['Rank', 3]
-    ]);
-    
-    var options = {
-        width: 250,
-        height: 250,
-        redFrom: 20,
-        redTo: 10,
-        yellowFrom: 10,
-        yellowTo: 5,
-        greenFrom: 5,
-        greenTo: 0,
-        minorTicks: 20,
-        max: 0,
-        min: 20,
-        majorTicks: ['20', '1']
-    };
-    var chart = google.visualization.Gauge(document.getElementById('chart-line'));
-    chart.draw(data, options);
-}
-
 function dashboardPageLoad() {
     fillCpuInfo();
     fillRamInfo();
     fillDiskMemory();
     doRequest('os', fillOsInfo); //padronize to this
     resetLastUpdatedTime();
+    chartsUpdater();
 }
 
 dashboardPageLoad();
-
-google.charts.load('current', {
-    packages: ['gauge']
-  }).then(function () {
-    var data = google.visualization.arrayToDataTable([
-      ['Label', 'Value'],
-      ['ALCANCE', 80],
-      ['OBJETIVO', 55],
-      ['MEDICOS TOP', 68]
-    ]);
-  
-    var options = {
-      width: 600, height: 220,
-      redFrom: 0, redTo: 75,
-      yellowFrom:75, yellowTo: 85,
-      greenFrom:85 , greenTo:100,
-      minorTicks: 5,
-      majorTicks: ['0.00%', '100.00%'],
-      min: 0,
-      max: 100
-    };
-  
-    var chart = new google.visualization.Gauge(document.getElementById('chart-line').getContext("2d"));
-  
-    var formatnumbers = new google.visualization.NumberFormat({
-      suffix: '%',
-      fractionDigits: 2
-    });
-    formatnumbers.format(data, 1);
-    console.log(chart);
-    chart.draw(data, options);
-  });
