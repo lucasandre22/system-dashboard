@@ -18,7 +18,8 @@ module.exports = {
         const { command } = req.body;
         const output = await execCommand(command);
         //get default message warning to use just status commands
-        return res.json(parseLineBreak(output));
+        let commandOutput = parseLineBreak(output);
+        return res.json({commandOutput});
     },
     async status(req, res) {
         return res.json(await execCommand("screenfetch"));

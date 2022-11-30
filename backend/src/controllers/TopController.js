@@ -13,7 +13,7 @@ async function parseTopCommandOutput() {
 
 module.exports = {
     async index(req, res) {
-        const pid_quantity = req.body.pid_quantity || 50;
+        const pid_quantity = req.body.pid_quantity || 150;
         const scriptPath = script_dir + "get_top_info.sh " + pid_quantity;
         const getTopInfo = 'sh ' + scriptPath;
         await execCommand(getTopInfo);

@@ -21,9 +21,11 @@ routes.put('/users/:id', (req, res) => {
 })
 
 routes.get('/cpu', CpuController.info);
+routes.get('/cpu_mhz', CpuController.getMhz);
 routes.get('/cpu_usage', CpuController.usage);
 
 routes.get('/driver', DriverController.info);
+routes.get('/filesystem', DriverController.getFileSystem);
 
 routes.get('/ram', MemoryController.info);
 
@@ -32,11 +34,12 @@ routes.get('/net', NetController.info);
 routes.get('/os', OsController.info);
 routes.get('/temps', OsController.temps);
 
-routes.get('/get_top_info', TopController.index);
-routes.post('/get_top_info', TopController.index);
+routes.get('/top', TopController.index);
+routes.post('/top', TopController.index);
 
 routes.post('/pid', PidController.index);
-routes.post('/pid_info', PidController.info);
+routes.get('/pid_info', PidController.info);
+routes.post('/pid_kill', PidController.kill);
 
 routes.post('/command', TerminalController.index);
 routes.get('/kernel_status', TerminalController.status);

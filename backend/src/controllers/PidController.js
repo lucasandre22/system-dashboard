@@ -22,10 +22,11 @@ module.exports = {
     * When a pid comes in request body, return /proc/<pid> directory informations about the pid.
     */
     async index(req, res) {
+        console.log(req.body);
         const getCommandLine = "cat /proc/" + req.body.pid + "/cmdline";
         const cmdLine = await execCommand(getCommandLine);
         const statObject = await splitStatOutput(req.body.pid);
-        const threads_pids = await execCommand("ls /proc/" + req.body.pid + "/task");
+        let threads_pids = await execCommand("ls /proc/" + req.body.pid + "/task");
         threads_pids = threads_pids.split(/[\n]/); ///[\n1-9]\g/
         statObject['threads_pids'] = threads_pids;
         statObject['cmdLine'] = cmdLine;
@@ -35,7 +36,7 @@ module.exports = {
     * return all running processes pids and their execFilename
     */
     async info(req, res) {
-        const output = await execCommand("find /proc -maxdepth 1 -mindepth 1 -type d -printf '\%f\n' | egrep -i '[\\0-9]' | while read -r pid ; do echo \"$pid $(cat /proc/\$pid/comm)\"; done");
+        let output = await execCommand("find /proc -maxdepth 1 -mindepth 1 -type d -printf '\%f\n' | egrep -i '[\\0-9]' | while read -r pid ; do echo \"$pid $(cat /proc/\$pid/comm)\"; done");
         output = output.split('\n');
         let object = {};
         for(let i = 0; i < output.length; i++) {
@@ -43,5 +44,11 @@ module.exports = {
             object[aux[0]] = aux[1]; 
         }
         return res.json(object);
+    },
+    async kill(req, res) {
+        let output = await execCommand("kill " + req.body.pid);
+        console.log(req);
+        console.log(output);
+        return res.json(output);
     }
 }
