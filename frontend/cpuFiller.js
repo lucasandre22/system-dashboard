@@ -13,8 +13,8 @@ function drawCpuMhzChart(value) {
     var options = {
         min: 0,
         max: 3700,
-        width: 500,
-        height: 700,
+        width: 355,
+        height: 355,
         greenFrom: 0,
         greenTo: 2800,
         yellowFrom: 2800,

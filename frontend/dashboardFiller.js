@@ -21,8 +21,8 @@ function drawCpuChart(value) {
         ['CPU (%)', value]
     ]);
     var options = {
-        width: 500,
-        height: 700,
+        width: 355,
+        height: 355,
         greenFrom: 0,
         greenTo: 80,
         redFrom: 90,
@@ -52,8 +52,8 @@ function drawRamChart(value) {
         ['RAM (%)', value]
     ]);
     var options = {
-        width: 500,
-        height: 600,
+        width: 355,
+        height: 355,
         greenFrom: 0,
         greenTo: 80,
         redFrom: 90,
