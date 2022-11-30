@@ -27704,5 +27704,9 @@ pre[class*="language-"] {
     overflow: auto !important;
   }
 }
+.chart {
+  width: 100%;
+  min-height: 355px;
+}
 
 /*# sourceMappingURL=dashboard-free.css.map */
