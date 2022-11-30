@@ -92,11 +92,6 @@ async function doRequest(requestType, onLoad) {
     }
 }
 
-function getId(id) {
-    return document.getElementById(id);
-}
-
-
 /*
 * CPU info
 *

@@ -55,6 +55,10 @@ function copyTag(id, inner) {
     return node;
 }
 
+function getId(id) {
+    return document.getElementById(id);
+}
+
 function drawCpuChart(value) {
     var data = google.visualization.arrayToDataTable([
         ['Label', 'Value'],
