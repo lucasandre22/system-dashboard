@@ -1,9 +1,5 @@
 var table = document.getElementById("processes-table");
 
-function buildUrl(requestType) {
-    return 'http://192.168.5.106:7777/' + requestType;
-}
-
 async function doRequest(requestType, onLoad) {
     let request = new XMLHttpRequest();
     let url = buildUrl(requestType);
@@ -28,25 +24,6 @@ async function doPostRequest(requestType, body, onLoad) {
         let jsonObject = JSON.parse(request.response);
         onLoad(jsonObject);
     }
-}
-
-function createTableCell(content) {
-    createTableCell(content, "", null);
-}
-
-function createTableCell(content, id, classes) {
-    let tableCell = document.createElement("td");
-    if(id) {
-        tableCell.id = id;
-    }
-    if(classes) {
-        classes = classes.split(' ');
-        for(let i = 0; i < classes.length; i++) {
-            table.classList.add(classes[i]);
-        }
-    }
-    tableCell.innerHTML = content;
-    return tableCell;
 }
 
 function createExpandButton(pid) {

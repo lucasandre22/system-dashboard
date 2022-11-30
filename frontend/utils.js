@@ -1,5 +1,10 @@
+
 function buildUrl(requestType) {
     return 'http://192.168.5.106:7777/' + requestType;
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 async function doRequest(requestType, onLoad) {
@@ -13,4 +18,70 @@ async function doRequest(requestType, onLoad) {
         let jsonObject = JSON.parse(request.response);
         onLoad(jsonObject);
     }
+}
+
+function createTableCell(content) {
+    createTableCell(content, "", null);
+}
+
+function createTableCell(content, id, classes) {
+    let tableCell = document.createElement("td");
+    if(id) {
+        tableCell.id = id;
+    }
+    if(classes) {
+        classes = classes.split(' ');
+        for(let i = 0; i < classes.length; i++) {
+            table.classList.add(classes[i]);
+        }
+    }
+    tableCell.innerHTML = content;
+    return tableCell;
+}
+
+function createTableLine() {
+    let tableLine = document.createElement("tr");
+    return tableLine;
+}
+
+function copyTag(id) {
+    copyTag(id, '');
+}
+
+function copyTag(id, inner) {
+    let node = document.getElementById(id).cloneNode(true);
+    console.log(node);
+    node.innerHTML = inner;
+    return node;
+}
+
+function drawCpuChart(value) {
+    var data = google.visualization.arrayToDataTable([
+        ['Label', 'Value'],
+        ['CPU (%)', value]
+    ]);
+    var options = {
+        width: 500,
+        height: 700,
+        greenFrom: 0,
+        greenTo: 80,
+        redFrom: 90,
+        redTo: 100,
+        yellowFrom: 75,
+        yellowTo: 90,
+        minorTicks: 5
+    };
+    var chart = new google.visualization.Gauge(document.getElementById('chart-gauge-cpu'));
+    chart.draw(data, options);
+    /*setTimeout(function() {
+        console.log("lala");
+        doRequest('cpu_usage', function (jsonObject) {
+            var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['CPU (%)', jsonObject.cpuPercentage],
+            ]);
+            chart.draw(data, options);
+        });
+        
+    }, 1000);*/
 }

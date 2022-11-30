@@ -12,7 +12,7 @@ function drawCpuChart() {
 }
 
 function drawRamChart() {
-    drawCpuChart(0);
+    drawRamChart(0);
 }
 
 function drawCpuChart(value) {
@@ -24,7 +24,6 @@ function drawCpuChart(value) {
         width: 500,
         height: 700,
         greenFrom: 0,
-        animation: { duration: 1000, easing: 'inAndOut' },
         greenTo: 80,
         redFrom: 90,
         redTo: 100,
@@ -65,10 +64,6 @@ function drawRamChart(value) {
     };
     var chart = new google.visualization.Gauge(document.getElementById('chart-gauge-ram'));
     chart.draw(data, options);
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 async function chartsUpdater() {
