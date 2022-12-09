@@ -1,6 +1,6 @@
 
 function buildUrl(requestType) {
-    return 'http://192.168.5.106:7777/' + requestType;
+    return 'http://127.0.0.1:7777/' + requestType;
 }
 
 function sleep(ms) {

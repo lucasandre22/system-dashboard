@@ -1,5 +1,5 @@
 const { util } = require('config');
-var osu = require('node-os-utils')
+var osu = require('node-os-utils');
 const { execCommand, splitTextBy } = require('../utils');
 var cpu = osu.cpu
 

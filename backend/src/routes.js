@@ -7,12 +7,27 @@ const MemoryController = require('./controllers/MemoryController');
 const NetController = require('./controllers/NetController');
 const OsController = require('./controllers/OsController');
 const TerminalController = require('./controllers/TerminalController');
+const TemperatureController = require('./controllers/TemperatureController');
+const { index } = require('./controllers/CpuController');
+const path = require("path");
 
 const routes = express.Router();
 
 routes.get('/', (req, res) => { 
-    return res.json({ message: "Dashboard's backend is running! :)" });
+    res.contentType('.html');
+    res.contentType('html');
+    res.type('.html');
+    //this is to save file
+    res.sendFile(path.join(__dirname, '../dashboard.html'));
+    //res.sendFile('/home/almeida/gitwork/system-dashboard/backend/dashboard.html');
+    
+    //res.sendFile('./../dashboard.html');
+    //res.render()
+    /*return res.render('/home/almeida/gitwork/system-dashboard/backend/dashboard.html', (err) => {
+
+    });*/
 });
+
 
 //everytime I make a request with insomnia with put method and with address http://localhost:7777/SOMETHING, SOMETHING will be the id
 routes.put('/users/:id', (req, res) => {
@@ -43,5 +58,16 @@ routes.post('/pid_kill', PidController.kill);
 
 routes.post('/command', TerminalController.index);
 routes.get('/kernel_status', TerminalController.status);
+
+routes.get('/temperature', TemperatureController.info);
+
+routes.get('/dashboard', teste);
+
+function teste(req, res) {
+
+
+    '../../frontend/pages/dashboard.html';
+    return res;
+}
 
 module.exports = routes;
