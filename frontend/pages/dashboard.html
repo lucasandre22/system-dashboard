@@ -34,6 +34,11 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.0.4" rel="stylesheet" />
+  <style>
+    canvas{
+    margin: 0 auto;
+    }
+  </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -279,9 +284,8 @@
           <div class="card z-index-2  ">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
               <div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
-                <div class="chart">
+                <div class="chart d-flex justify-content-center">
                     <div id="chart-gauge-cpu" class="justify-content-center chart"></div>
-                  <!--<canvas id="chart-gauge-cpu" class="chart-canvas" height="170"></canvas>-->
                 </div>
               </div>
             </div>
@@ -298,10 +302,8 @@
           <div class="card z-index-2 ">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
               <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1">
-                <div class="chart">
-                    <div class="chart">
-                        <div id="chart-gauge-ram" class="justify-content-center chart"></div>
-                    </div>
+                <div class="chart d-flex justify-content-center">
+                    <div id="chart-gauge-ram" class="justify-content-center chart"></div>
                 </div>
               </div>
             </div>

@@ -49,9 +49,9 @@ function drawRamChart(value) {
         ['Label', 'Value'],
         ['RAM (%)', value]
     ]);
+    /*-        width: 500,
+-        height: 700,*/
     var options = {
-        width: 355,
-        height: 355,
         greenFrom: 0,
         greenTo: 80,
         redFrom: 90,
