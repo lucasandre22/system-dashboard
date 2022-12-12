@@ -88,6 +88,5 @@ function teste(element){
     } else {
         parent.children[1].classList.add("collapse");
     }
-    
 }
 onLoad();

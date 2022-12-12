@@ -6,9 +6,8 @@ var cpu = osu.cpu
 async function execAndParseSensors(data) {
     let output = await execCommand('sensors');
     let dataMap = await splitTextBy(':', output);
-    console.log(dataMap);
     return {
-        'core': dataMap.get('Package id 0').split(' ')[0],
+        'core': dataMap.get('Core 0').split(' ')[0],
         'wifi': dataMap.get('temp1'),
         'disk': dataMap.get('Composite').split(' ')[0]
     };

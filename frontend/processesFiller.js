@@ -110,7 +110,8 @@ async function expandButtonEvent(pid) {
 function populateTable(jsonObject) {
     const pids = Object.entries(jsonObject.pids);
     table.innerHTML = "";
-    for(let i = pids.length - 1; i >= 0; i--) {
+    console.log(jsonObject);
+    for(let i = pids.length - 2; i >= 0; i--) {
         let pidObject = pids[i];
         table.appendChild(createTableLine(pidObject[0], pidObject[1]));
         table.appendChild(createTableCollapseLine(pidObject[0]));

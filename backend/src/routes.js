@@ -18,7 +18,7 @@ routes.get('/', (req, res) => {
     res.contentType('html');
     res.type('.html');
     //this is to save file
-    res.sendFile(path.join(__dirname, '../dashboard.html'));
+    res.sendFile(path.join(__dirname, '../../frontend/pages/dashboard.html'));
     //res.sendFile('/home/almeida/gitwork/system-dashboard/backend/dashboard.html');
     
     //res.sendFile('./../dashboard.html');

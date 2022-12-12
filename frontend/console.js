@@ -95,6 +95,7 @@ input.addEventListener('input', () => {
   // If we paste HTML, format it as plain text and break it up
   // input individual lines/commands:
   if (input.childElementCount > 0) {
+    console.log("input:" + input.innerText.replace(/\n$/, '') + ";");
     const lines = input.innerText.replace(/\n$/, '').split('\n');
     const lastLine = lines[lines.length - 1];
     
@@ -119,16 +120,22 @@ document.addEventListener('keydown', (e) => {
   if (e.target !== input) focusAndMoveCursorToTheEnd();
 });
 
-input.addEventListener('keydown', async function (e) {    
+input.addEventListener('keydown', async function (e) {
+  console.log("Text content:" + input.textContent + ";");
   if (e.key === 'Enter') {
     e.preventDefault();
     if(input.textContent == "clear") {
         history.innerHTML = "";
     } else {
+        console.log("Text content:" + input.textContent);
         await handleCommand(input.textContent);
     }
     input.textContent = '';
     focusAndMoveCursorToTheEnd();
+  }
+  if(e.key == 'Space') {
+    input.textContent.append("&nbsp");
+    console.log("append!");
   }
 });
 
